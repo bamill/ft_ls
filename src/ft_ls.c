@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ls.h                                            :+:      :+:    :+:   */
+/*   ft_ls.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmiller <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/05/20 18:00:37 by bmiller           #+#    #+#             */
-/*   Updated: 2017/05/23 16:49:16 by bmiller          ###   ########.fr       */
+/*   Created: 2017/05/23 16:04:32 by bmiller           #+#    #+#             */
+/*   Updated: 2017/05/23 17:12:58 by bmiller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_LS_H
-# define FT_LS_H
-# include <unistd.h>
-# include <sys/stat.h>
-# include <dirent.h>
-# include <sys/types.h>
-# include <pwd.h>
-# include <uuid/uuid.h>
-# include <grp.h>
-# include <sys/xattr.h>
-# include <time.h>
-# include <stdlib.h>
-# include <stdio.h>
-# include <termios.h>
-# include "libft.h"
+#include "ft_ls.h"
+#include <stdio.h>
 
-void		ft_ls(DIR *d);
+void		ft_ls(DIR *d)
+{
+    struct dirent	*dir;
+    char			current[1024];
 
-#endif
+    if (!d)
+        return ;
+    while ((dir = readdir(d)) != NULL)
+    {
+        if (dir->d_name[0] != '.')
+            printf("%s\n", dir->d_name);
+    }
+}
